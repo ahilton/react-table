@@ -600,14 +600,17 @@ export default class ReactTable extends Methods(Lifecycle(Component)) {
                 } else {
                   newExpanded = _.set(newExpanded, cellInfo.nestingPath, {})
                 }
-
+                
+                if (onExpandedChange){
+                  newExpanded = onExpandedChange(newExpanded, cellInfo.nestingPath, e)
+                }
+                
                 return this.setStateWithData(
                   {
                     expanded: newExpanded,
                   },
                   () => (
-                    onExpandedChange &&
-                      onExpandedChange(newExpanded, cellInfo.nestingPath, e)
+                    //onExpandedChange && onExpandedChange(newExpanded, cellInfo.nestingPath, e)
                   ),
                 )
               }
